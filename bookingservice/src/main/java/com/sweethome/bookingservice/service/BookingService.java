@@ -1,8 +1,10 @@
 package com.sweethome.bookingservice.service;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.sweethome.bookingservice.exceptions.CustomException;
 import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,7 @@ public class BookingService {
 	BookiningDao bookingDao;
 	RestTemplate restTemplate;
 	Producer<String, String> producer;
-	private int pricePerRoom = 1000;
+	private int pricePerRoomPerDay = 1000;
 
 
 	@Value("${url.service.payment}")
@@ -45,7 +47,7 @@ public class BookingService {
 
 	public BookingInfoEntity  bookingDetails(BookingDto bookingRequest) {
 
-		//SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 		Date date = new Date();
 		int requestedNumOfRooms = bookingRequest.getNumOfRooms();
 
@@ -56,7 +58,9 @@ public class BookingService {
 		bookingInfo.setToDate(bookingRequest.getToDate());
 		bookingInfo.setBookedOn(date);
 		bookingInfo.setAadharNumber(bookingRequest.getAadharNumber());
-		bookingInfo.setRoomPrice(bookingRequest.getNumOfRooms()* pricePerRoom);
+		long numberOfDays = (bookingInfo.getToDate().getTime() - bookingRequest.getFromDate().getTime())/ (1000*60*60*24) % 365;
+		System.out.println("Number of Days: " + numberOfDays);
+		bookingInfo.setRoomPrice((int) (bookingRequest.getNumOfRooms()* pricePerRoomPerDay* numberOfDays));
 		System.out.println(bookingInfo.toString());
 		return bookingDao.save(bookingInfo);
 	}
@@ -79,7 +83,7 @@ public class BookingService {
 			bookingDao.save(bookingInfo);
 			String message = "Booking confirmed for user with aadhaar number: " + bookingInfo.getAadharNumber() +
 					"    |    " + "Here are the booking details:    " + bookingInfo.toString();
-			//producer.send(new ProducerRecord<String, String>("message","message", message));
+			producer.send(new ProducerRecord<String, String>("message","message", message));
 			return bookingInfo;
 		}else {
 			throw new CustomException("Invalid Booking Id");

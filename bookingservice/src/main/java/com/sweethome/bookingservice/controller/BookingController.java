@@ -34,10 +34,6 @@ public class BookingController {
 		return new ResponseEntity<BookingInfoEntity>(bookingInfo, HttpStatus.CREATED);
 	}
 
-	@PostMapping("/testing")
-	public ResponseEntity<CustomResponse> random(@RequestBody PaymentDto paymentDto){
-		return new ResponseEntity<>(new CustomResponse("Hello Boy", 200), HttpStatus.OK);
-	}
 
 
 
