@@ -1,0 +1,7 @@
+Jar File Creation: 
+All Spring Boot Projects:
+
+mvn clean install
+
+Notification Service: 
+mvn clean package

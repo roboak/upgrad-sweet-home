@@ -15,7 +15,7 @@ public class KafkaConfig {
 	@Bean
 	public  Producer<String, String> setUpKafkaPropoerties() {
 		   Properties properties = new Properties();
-	        properties.put("bootstrap.servers", "ec2-54-226-191-240.compute-1.amazonaws.com:9092");
+	        properties.put("bootstrap.servers", "ec2-18-206-169-108.compute-1.amazonaws.com:9092");
 	        properties.put("acks", "all");
 	        properties.put("retries", 0);
 	        properties.put("linger.ms", 0);

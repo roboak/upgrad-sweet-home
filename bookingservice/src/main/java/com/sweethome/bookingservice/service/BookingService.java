@@ -83,7 +83,7 @@ public class BookingService {
 			bookingDao.save(bookingInfo);
 			String message = "Booking confirmed for user with aadhaar number: " + bookingInfo.getAadharNumber() +
 					"    |    " + "Here are the booking details:    " + bookingInfo.toString();
-			producer.send(new ProducerRecord<String, String>("message","message", message));
+			//producer.send(new ProducerRecord<String, String>("message","message", message));
 			return bookingInfo;
 		}else {
 			throw new CustomException("Invalid Booking Id");
