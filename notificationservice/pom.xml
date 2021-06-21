@@ -37,6 +37,7 @@
         </plugin>
 
     </plugins>
+	<finalName>notificationService</finalName>
     </build>
     <properties>
 		<java.version>11</java.version>

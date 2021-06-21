@@ -80,6 +80,7 @@
 				<version>${project.parent.version}</version>
 			</plugin>
 		</plugins>
+		<finalName>bookingService</finalName>
 	</build>
 
 </project>
