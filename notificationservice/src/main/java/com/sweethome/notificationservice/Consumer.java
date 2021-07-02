@@ -13,7 +13,7 @@ public class Consumer {
 	
 	public static void main(String[] args) {
 		
-		String kafakServer = "ec2-18-206-169-108.compute-1.amazonaws.com:9092";
+		String kafakServer = "kafka:9092";
         Properties props = new Properties();
         props.setProperty("bootstrap.servers", kafakServer);
         props.setProperty("group.id", "sweethome");
