@@ -31,6 +31,8 @@ services:
       - app-tier
   notification-service:
     build: ./notificationservice
+    depends_on:
+      - kafka
   eureka-service:
     build: ./eurekaserver
     ports:

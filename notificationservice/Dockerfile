@@ -7,6 +7,6 @@ RUN ls -lash ./target
 
 FROM gcr.io/distroless/java
 WORKDIR /usr/src/app  
-COPY --from=build /usr/src/app/target/notificationService.jar notificationService.jar  
+COPY --from=build /usr/src/app/target/notificationService-*.jar notificationService.jar  
 EXPOSE 8080  
 ENTRYPOINT ["java","-jar","notificationService.jar"]  
