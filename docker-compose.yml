@@ -34,7 +34,7 @@ services:
   eureka-service:
     build: ./eurekaserver
     ports:
-      - 8762:8762
+      - 8761:8761
     networks:
       - app-tier
   kafka:
@@ -56,8 +56,6 @@ services:
       - "zookeeper_data:/bitnami"
     ports:
       - "2181:2181"
-    volumes:
-      - "zookeeper_data:/bitnami"
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
     networks:
