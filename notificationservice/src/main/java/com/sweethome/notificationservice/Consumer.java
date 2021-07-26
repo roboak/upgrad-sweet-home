@@ -13,9 +13,8 @@ public class Consumer {
 	
 	public static void main(String[] args) {
 		
-	String kafakServer = "localhost:9092";
         Properties props = new Properties();
-        props.setProperty("bootstrap.servers", kafakServer);
+        props.setProperty("bootstrap.servers", "kafka:9092");
         props.setProperty("group.id", "sweethome");
         props.setProperty("enable.auto.commit", "true");
         props.setProperty("auto.commit.interval.ms", "1000");
